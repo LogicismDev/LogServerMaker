@@ -2,7 +2,7 @@
 
 A simple Java program to help users create servers easily.
 
-[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v1.8)
+[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v1.10)
 
 * **Java 11 or higher is required in order to run LogServerMaker! You can install Java 11 these ways:**
     * Windows: Provided Installer (.exe) file.
@@ -15,20 +15,20 @@ A simple Java program to help users create servers easily.
 
 * Server Types Supported:
     * Vanilla (1.7.10 to Latest JE)
-    * Bedrock (1.16.220 BE)
+    * Bedrock (1.17.0 BE)
     * Spigot (1.7.10 to 1.16.5 JE)
-    * Paper (1.8 to Latest JE)
+    * Paper (1.8 to 1.16.5 JE)
     * BungeeCord (1.7.10 to 1.16.5 JE)
-    * Waterfall (1.8 to Latest JE)
-    * Travertine (1.7.10 to Latest JE)
-    * Velocity (1.7.4 to 1.16.5 JE)
+    * Waterfall (1.8 to 1.17 JE)
+    * Travertine (1.7.10 to 1.17 JE)
+    * Velocity (1.7.4 to 1.17 JE)
     * Forge (1.7.10 to 1.16.5 JE)
-    * Fabric (1.14 to 1.16.5 JE)
-    * Geyser (1.16.220 BE)
-    * PocketMine (1.16.220 BE)
+    * Fabric (1.14 to 1.17 JE)
+    * Geyser (1.17.0 BE)
+    * PocketMine (1.17.0 BE)
     * Nukkit (1.16.220 BE)
     * Waterdog (1.8 to 1.15.2 JE and 1.16.220 BE)
-    * WaterdogPE (1.16.220 BE)
+    * WaterdogPE (1.17.0 BE)
 
 * Features:
     * Creation of Multiple Servers
