@@ -2,23 +2,18 @@
 
 A simple Java program to help users create servers easily.
 
-[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.0)
+[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.1)
 
-* **Java 11 or higher is required in order to run LogServerMaker! You can install Java 11 these ways:**
-    * Windows: Provided Installer (.exe) file.
-    * macOS: Provided Installer (.dmg) file.
-    * Linux:
-        * Debian & Ubuntu: sudo apt install openjdk-11
-        * Redhat Linux: sudo yum install java-11-openjdk-devel
-        * Fedora Linux: sudo dnf install java-11-openjdk.x86_64
-        * Other Linux: Included (.tar.gz) file. (Choose one that fits your Systems Architecture)
+* **Java 16 or higher is required in order to run LogServerMaker! You can install Java 16 from here:**
+    * https://www.oracle.com/java/technologies/javase-jdk16-downloads.html
 
 * Server Types Supported:
     * Vanilla (1.7.10 to Latest JE)
     * Bedrock (1.17.0 BE)
-    * Spigot (1.7.10 to 1.16.5 JE)
+    * CraftBukkit (1.7.10 to 1.17)
+    * Spigot (1.7.10 to 1.17 JE)
     * Paper (1.8 to 1.16.5 JE)
-    * BungeeCord (1.7.10 to 1.16.5 JE)
+    * BungeeCord (1.7.10 to 1.17 JE)
     * Waterfall (1.8 to 1.17 JE)
     * Travertine (1.7.10 to 1.17 JE)
     * Velocity (1.7.4 to 1.17 JE)
@@ -27,7 +22,6 @@ A simple Java program to help users create servers easily.
     * Geyser (1.17.0 BE)
     * PocketMine (1.17.0 BE)
     * Nukkit (1.16.220 BE)
-    * Waterdog (1.8 to 1.15.2 JE and 1.16.220 BE)
     * WaterdogPE (1.17.0 BE)
 
 * Features:
