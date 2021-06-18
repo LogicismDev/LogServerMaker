@@ -18,6 +18,7 @@ A simple Java program to help users create servers easily.
     * Travertine (1.7.10 to 1.17 JE)
     * Velocity (1.7.4 to 1.17 JE)
     * Forge (1.7.10 to 1.16.5 JE)
+    * SpongeVanilla (1.8 to 1.12.2 JE)
     * Fabric (1.14 to 1.17 JE)
     * Geyser (1.17.0 BE)
     * PocketMine (1.17.0 BE)
@@ -29,7 +30,7 @@ A simple Java program to help users create servers easily.
     * Opening Multiple Servers
     * Downloading Server Software (except for Forge and Fabric Servers)
     * server.properties Editor
-    * config.yml Editor (Geyser, BungeeCord, Waterfall, Travertine, Waterdog and WaterdogPE only)
+    * config.yml Editor (Geyser, BungeeCord, Waterfall, Travertine, Velocity and WaterdogPE only)
     * UPnP Port Forwarder (TCP and UDP)
     * Port Forward Checker (TCP and UDP)
     * Theme Changer
