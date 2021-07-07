@@ -2,7 +2,7 @@
 
 A simple Java program to help users create servers easily.
 
-[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.2)
+[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.3)
 
 * **Java 16 or higher is required in order to run LogServerMaker! You can install Java 16 from here:**
     * https://www.oracle.com/java/technologies/javase-jdk16-downloads.html
@@ -12,7 +12,9 @@ A simple Java program to help users create servers easily.
     * Bedrock (1.17.0 BE)
     * CraftBukkit (1.7.10 to 1.17)
     * Spigot (1.7.10 to 1.17 JE)
-    * Paper (1.8 to 1.16.5 JE)
+    * Paper (1.8 to 1.17 JE)
+    * Tuinity (1.14.3 to 1.17 JE)
+    * Purpur (1.14.1 to 1.17 JE)
     * BungeeCord (1.7.10 to 1.17 JE)
     * Waterfall (1.8 to 1.17 JE)
     * Travertine (1.7.10 to 1.17 JE)
