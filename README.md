@@ -2,7 +2,7 @@
 
 A simple Java program to help users create servers easily.
 
-[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.4)
+[Download Latest Version](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v2.5)
 
 * **Java 16 or higher is required in order to run LogServerMaker! You can install Java 16 from here:**
     * https://www.oracle.com/java/technologies/javase-jdk16-downloads.html
