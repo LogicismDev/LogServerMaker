@@ -19,7 +19,7 @@ A simple Java program to help users create servers easily.
     * Waterfall (1.8 to 1.17.1 JE)
     * Travertine (1.7.10 to 1.17.1 JE)
     * Velocity (1.7.4 to 1.17.1 JE)
-    * Forge (1.7.10 to 1.16.5 JE)
+    * Forge (1.7.10 to 1.17.1 JE)
     * SpongeVanilla (1.8 to 1.12.2 JE)
     * Fabric (1.14 to 1.17.1 JE)
     * Geyser (1.17.10 BE)
