@@ -2,7 +2,7 @@
 
 A simple Java program to help users create servers easily.
 
-[Download for Windows](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) - [Download for macOS/Linux](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) -  [Download (Mirror)](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v3.2)
+[Download for Windows](https://logicism.tv/downloads/LogServerMaker-v3.2_win64.zip) - [Download for macOS/Linux](https://logicism.tv/downloads/LogServerMaker-v3.2_macos_linux.zip) -  [Download (Mirror)](https://mega.nz/folder/JQJWDToI#2DLwnCAxI_LOBbGzP7Bhiw) (v3.2)
 
 * **Java 17 or higher is required in order to run LogServerMaker! You can install Java 17 from here:**
     * https://www.oracle.com/java/technologies/downloads/
