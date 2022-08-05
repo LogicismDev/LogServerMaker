@@ -1,0 +1,36 @@
+3.2 - August 5, 2022
+- Update to 1.19 Java Edition
+- Update to 1.19.11 Bedrock Edition
+- Update CraftBukkit Download
+- Update Spigot Download
+- Update LogSM Dependencies
+- Add New Update Dialog with Changelogs
+- Implement Automatic Updater
+
+3.1 - June 11, 2022
+- Update to 1.19 Java Edition
+- Update to 1.19.0 Bedrock Edition
+- Update CraftBukkit Download
+- Update Spigot Download
+- Update Purpur Download
+- Update BungeeCord Download
+- Update NanoLimbo Download
+- Update SpongeVanilla to 1.18.2
+- Update PocketMine Download
+- Update FlatLaf to use new theme features for Flat Dark and Flat Light themes
+    - Add Smooth Scrolling to Server List, Player List and Console
+    - Update Tab Type in Server Pages
+    - Update Tab Width
+    - Update Tabs to have Separators between content and other Tabs
+
+3.0 - May 7, 2022
+- Add Airplane Server Type
+- Add NanoLimbo Server Type
+- Add Mohist Server Type
+- Add Magma Server Type
+- Update to 1.18.2 Java Edition
+- Update to 1.18.32 Bedrock Edition
+- Update BungeeCord Download
+- Update Velocity Download Permanently
+- Update PocketMine Download
+- Added SpongeVanilla Versions and Download
