@@ -6,6 +6,7 @@
 - Update LogSM Dependencies
 - Add New Update Dialog with Changelogs
 - Implement Automatic Updater
+- Added Max Chained Neighbor Updates, Enforce Secure Profile and Enable Chat Preview for 1.19 Servers
 
 3.1 - June 11, 2022
 - Update to 1.19 Java Edition
