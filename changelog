@@ -1,3 +1,18 @@
+3.3 - August 19, 2022
+- Update to 1.19.2 Java Edition
+- Update SpongeVanilla Download
+- Update Spigot Download
+- Update Forge to 1.19.2
+- Fix & Update Mohist Download to 1.19.2
+- Update Magma Download to 1.18.2
+- Fix & Update CraftBukkit Download
+- Fix SpongeVanilla not showing 1.18.2
+- Fix & Update Bedrock Download
+- Change Download Progress to Progress Bar Window
+- Add EULA Prompt for Bedrock Edition Servers, and Java Edition Proxies
+- Fix Download Window not disappearing if Download fails
+- Optimize Some Code
+
 3.2 - August 5, 2022
 - Update to 1.19 Java Edition
 - Update to 1.19.11 Bedrock Edition
@@ -23,16 +38,3 @@
     - Update Tab Type in Server Pages
     - Update Tab Width
     - Update Tabs to have Separators between content and other Tabs
-
-3.0 - May 7, 2022
-- Add Airplane Server Type
-- Add NanoLimbo Server Type
-- Add Mohist Server Type
-- Add Magma Server Type
-- Update to 1.18.2 Java Edition
-- Update to 1.18.32 Bedrock Edition
-- Update BungeeCord Download
-- Update Velocity Download Permanently
-- Update PocketMine Download
-- Added SpongeVanilla Versions and Download
-- Add Check for Updates Button in Settings
