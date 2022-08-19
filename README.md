@@ -20,7 +20,7 @@ A simple Java program to help users create servers easily.
     * Velocity (1.7.4 to 1.19.2 JE)
     * NanoLimbo (1.8 to 1.18.2 JE)
     * Forge (1.7.10 to 1.19.2 JE)
-    * Magma (1.12.2 to 1.16.5 JE)
+    * Magma (1.12.2 to 1.19.2 JE)
     * Mohist (1.7.10 to 1.19.2 JE)
     * SpongeVanilla (1.8.9 to 1.18.2 JE)
     * Fabric (1.14 to 1.19.2 JE)
