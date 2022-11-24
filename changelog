@@ -1,3 +1,12 @@
+3.4 - November 23, 2022
+- Fix Bedrock not Extracting
+- Update SpongeVanilla to 1.19.2
+- Update BungeeCord Download
+- Fix PocketMine Download
+- Fix NanoLimbo Download
+- Remove Airplane Server Type as it is no longer supported
+- Airplane is now deprecated and removed from creating servers. If you try to launch one, it'll report to backup the files
+
 3.3 - August 19, 2022
 - Update to 1.19.2 Java Edition
 - Update SpongeVanilla Download
@@ -22,19 +31,3 @@
 - Add New Update Dialog with Changelogs
 - Implement Automatic Updater
 - Added Max Chained Neighbor Updates, Enforce Secure Profile and Enable Chat Preview for 1.19 Servers
-
-3.1 - June 11, 2022
-- Update to 1.19 Java Edition
-- Update to 1.19.0 Bedrock Edition
-- Update CraftBukkit Download
-- Update Spigot Download
-- Update Purpur Download
-- Update BungeeCord Download
-- Update NanoLimbo Download
-- Update SpongeVanilla to 1.18.2
-- Update PocketMine Download
-- Update FlatLaf to use new theme features for Flat Dark and Flat Light themes
-    - Add Smooth Scrolling to Server List, Player List and Console
-    - Update Tab Type in Server Pages
-    - Update Tab Width
-    - Update Tabs to have Separators between content and other Tabs
