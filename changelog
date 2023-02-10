@@ -1,0 +1,36 @@
+3.5 - January 16, 2023
+- Created Windows Installer for LogSM. If you prefer installing it, download it from the website.
+- Created macOS Application for LogSM. Download the dmg file from the website to use.
+- Update to 1.19.3 Java Edition
+- Update to 1.19.51 Bedrock Edition
+- Update SpongeVanilla to 1.19.3
+- Fix NanoLimbo Download
+- Fix & Update Spigot Download
+- Update CraftBukkit Download
+- Remove 1.18.2 Mohist Download
+- Update Mohist Download to 1.19.3
+- Added Percent and Speed Counter in Download Progress Bar
+
+3.4 - November 23, 2022
+- Fix Bedrock not Extracting
+- Update SpongeVanilla to 1.19.2
+- Update BungeeCord Download
+- Fix PocketMine Download
+- Fix NanoLimbo Download
+- Remove Airplane Server Type as it is no longer supported
+- Airplane is now deprecated and removed from creating servers. If you try to launch one, it'll report to backup the files
+
+3.3 - August 19, 2022
+- Update to 1.19.2 Java Edition
+- Update SpongeVanilla Download
+- Update Spigot Download
+- Update Forge to 1.19.2
+- Fix & Update Mohist Download to 1.19.2
+- Update Magma Download to 1.18.2
+- Fix & Update CraftBukkit Download
+- Fix SpongeVanilla not showing 1.18.2
+- Fix & Update Bedrock Download
+- Change Download Progress to Progress Bar Window
+- Add EULA Prompt for Bedrock Edition Servers, and Java Edition Proxies
+- Fix Download Window not disappearing if Download fails
+- Optimize Some Code
