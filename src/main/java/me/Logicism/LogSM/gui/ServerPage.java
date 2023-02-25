@@ -547,7 +547,9 @@ public class ServerPage extends JFrame {
                             }
                         } else {
                             File serverJar = new File("servers/" + server.getDirName() + "/server.jar");
-                            if (!serverJar.exists()) {
+                            File forgeServerArgs = new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge/" + new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge").listFiles()[0].getName() + (System.getProperty("os.name").startsWith("Windows") ? "/win_args.txt" : "/unix_args.txt"));
+
+                            if (!(forgeServerArgs.exists() && server.getServerType().equals(ServerType.Forge)) && !serverJar.exists()) {
                                 JOptionPane.showMessageDialog(null, "You must download the server software before you can run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                 return;
                             } else {
@@ -575,7 +577,7 @@ public class ServerPage extends JFrame {
                                         }
                                     }
 
-                                    startServer(server, serverProperties);
+                                    startServer(server, serverProperties, forgeServerArgs.exists());
                                 } else {
                                     JOptionPane.showMessageDialog(null, "You must agree to the EULA to run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                     return;
@@ -1208,7 +1210,7 @@ public class ServerPage extends JFrame {
         }
     }
 
-    public void startServer(Server server, File serverProperties) {
+    public void startServer(Server server, File serverProperties, boolean forgeFileArgsExist) {
         if (!consoleTextPane.getText().isEmpty()) {
             consoleTextPane.setText("");
         }
@@ -1224,14 +1226,18 @@ public class ServerPage extends JFrame {
         }
         commands.add("-Xmx" + server.getRAM() + "M");
         commands.add("-Xms" + server.getRAM() + "M");
-        commands.add("-jar");
-        if (server.getServerType().equals(ServerType.Fabric)) {
-            commands.add(new File("servers/" + server.getDirName() + "/fabric-server-launch.jar").getAbsolutePath());
+        if (forgeFileArgsExist) {
+            commands.add("@libraries/net/minecraftforge/forge/" + new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge").listFiles()[0].getName() + (System.getProperty("os.name").contains("Windows") ? "/win_args.txt" : "/unix_args.txt"));
         } else {
-            commands.add(new File("servers/" + server.getDirName() + "/server.jar").getAbsolutePath());
-        }
-        if (server.getServerType().equals(ServerType.Nukkit)) {
-            commands.add("--disable-ansi");
+            commands.add("-jar");
+            if (server.getServerType().equals(ServerType.Fabric)) {
+                commands.add(new File("servers/" + server.getDirName() + "/fabric-server-launch.jar").getAbsolutePath());
+            } else {
+                commands.add(new File("servers/" + server.getDirName() + "/server.jar").getAbsolutePath());
+            }
+            if (server.getServerType().equals(ServerType.Nukkit)) {
+                commands.add("--disable-ansi");
+            }
         }
         commands.add("nogui");
         ProcessBuilder processBuilder = new ProcessBuilder(commands);
@@ -1255,7 +1261,7 @@ public class ServerPage extends JFrame {
                     }
                     dos = null;
 
-                    startServer(server, serverProperties);
+                    startServer(server, serverProperties, forgeFileArgsExist);
                 } else if (OFFLINEButton.getText().equals("STOPPING")) {
                     consoleTextPane.append("\n" + "Server Stopped or Crashed");
                     consoleTextPane.setCaretPosition(consoleTextPane.getDocument().getLength());

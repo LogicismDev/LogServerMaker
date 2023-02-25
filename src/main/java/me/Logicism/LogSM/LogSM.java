@@ -39,7 +39,7 @@ public class LogSM {
     public static List<String> spongeVanillaVersions = Arrays.asList("1.19.3", "1.19.2", "1.18.2", "1.18.1", "1.17.1", "1.16.5", "1.16.4", "1.15.2", "1.12.2", "1.11.2", "1.10.2", "1.9.4", "1.8.9");
     public static List<String> fabricVersions = new ArrayList<>();
 
-    public static String VERSION = "3.5";
+    public static String VERSION = "3.6";
 
     private static List<Server> serverList = new ArrayList<>();
     private static String externalIP;
