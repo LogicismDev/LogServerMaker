@@ -11,12 +11,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.json:json:20220320" level="project" />
-    <orderEntry type="library" name="Maven: com.github.oshi:oshi-core:6.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20230227" level="project" />
+    <orderEntry type="library" name="Maven: com.github.oshi:oshi-core:6.4.0" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:5.12.1" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:5.12.1" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.36" level="project" />
-    <orderEntry type="library" name="Maven: com.formdev:flatlaf:2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.5" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.21" level="project" />
     <orderEntry type="library" name="Maven: com.whirvis:jraknet:2.12.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.13.2" level="project" />
@@ -27,8 +27,8 @@
     <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.49.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.49.Final" level="project" />
     <orderEntry type="library" name="Maven: com.dosse:upnp:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.17.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.14.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.20.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.15.4" level="project" />
     <orderEntry type="library" name="Maven: org.fourthline.cling:cling-core:2.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.seamless:seamless-util:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.seamless:seamless-http:1.1.2" level="project" />

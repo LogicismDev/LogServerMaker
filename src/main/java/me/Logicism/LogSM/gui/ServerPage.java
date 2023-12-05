@@ -494,7 +494,7 @@ public class ServerPage extends JFrame {
                     FileOutputStream fos = new FileOutputStream(serverProperties);
                     config.store(fos, null);
                     fos.flush();
-                    fos.close();
+                    fos.close();    
 
                     server.save();
 
@@ -547,9 +547,9 @@ public class ServerPage extends JFrame {
                             }
                         } else {
                             File serverJar = new File("servers/" + server.getDirName() + "/server.jar");
-                            File forgeServerArgs = new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge/" + new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge").listFiles()[0].getName() + (System.getProperty("os.name").startsWith("Windows") ? "/win_args.txt" : "/unix_args.txt"));
+                            File forgeServerDir = new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge");
 
-                            if (!(forgeServerArgs.exists() && server.getServerType().equals(ServerType.Forge)) && !serverJar.exists()) {
+                            if (!(forgeServerDir.exists() && server.getServerType().equals(ServerType.Forge)) && !serverJar.exists()) {
                                 JOptionPane.showMessageDialog(null, "You must download the server software before you can run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                 return;
                             } else {
@@ -577,7 +577,7 @@ public class ServerPage extends JFrame {
                                         }
                                     }
 
-                                    startServer(server, serverProperties, forgeServerArgs.exists());
+                                    startServer(server, serverProperties, forgeServerDir.exists());
                                 } else {
                                     JOptionPane.showMessageDialog(null, "You must agree to the EULA to run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                     return;

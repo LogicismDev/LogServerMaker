@@ -96,6 +96,9 @@ public class NetworkClient {
     public static URL getCraftBukkitURL(String version) {
         try {
             switch (version) {
+                case "1.20.2":
+                case "1.20.1":
+                case "1.19.4":
                 case "1.19.3":
                 case "1.19.2":
                 case "1.19.1":
@@ -154,6 +157,9 @@ public class NetworkClient {
     public static URL getSpigotURL(String version) {
         try {
             switch (version) {
+                case "1.20.2":
+                case "1.20.1":
+                case "1.19.4":
                 case "1.19.3":
                 case "1.19.2":
                 case "1.19.1":
@@ -235,7 +241,7 @@ public class NetworkClient {
 
     public static URL getPurpurURL(String version) {
         try {
-            return new URL("https://api.pl3x.net/v2/purpur/" + version + "/latest/download");
+            return new URL("https://api.purpurmc.org/v2/purpur/" + version + "/latest/download");
         } catch (MalformedURLException e) {
 
         }
@@ -246,6 +252,7 @@ public class NetworkClient {
     public static URL getMagmaURL(String version) {
         try {
             switch (version) {
+                case "1.19.3":
                 case "1.18.2":
                 case "1.16.5":
                 case "1.12.2":
@@ -260,17 +267,21 @@ public class NetworkClient {
 
     public static URL getMohistURL(String version) {
         try {
-            Document document = switch (version) {
-                case "1.19.3" -> Jsoup.connect("https://ci.codemc.io/job/MohistMC/job/Mohist-1.19.3/lastStableBuild/").get();
-                case "1.16.5" -> Jsoup.connect("https://ci.codemc.io/job/MohistMC/job/Mohist-1.16.5/lastStableBuild/").get();
-                case "1.12.2" -> Jsoup.connect("https://ci.codemc.io/job/MohistMC/job/Mohist-1.12.2/lastStableBuild/").get();
-                case "1.7.10" -> Jsoup.connect("https://ci.codemc.io/job/MohistMC/job/Mohist-1.7.10/lastStableBuild/").get();
-                default -> null;
-            };
-            Element element = document.selectFirst("#main-panel > table > tbody > tr:nth-child(1) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > a");
-            return new URL(document.location() + element.attr("href"));
+            BrowserData bd = executeGETRequest(new URL("https://mohistmc.com/api/v2/projects/mohist/" + version + "/builds"));
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            String s;
+            StringBuilder sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+
+            JSONObject jsonObject = new JSONObject(sb.toString());
+            JSONArray builds = jsonObject.getJSONArray("builds");
+
+            return new URL(builds.getJSONObject(builds.length() - 1).getString("url"));
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         return null;
@@ -306,7 +317,7 @@ public class NetworkClient {
 
     public static URL getGeyserURL() {
         try {
-            return new URL("https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastStableBuild/artifact/bootstrap/standalone/target/Geyser.jar");
+            return new URL("https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/standalone");
         } catch (MalformedURLException e) {
 
         }
@@ -415,8 +426,14 @@ public class NetworkClient {
     public static URL getSpongeVanillaURL(String version) {
         try {
             switch (version) {
+                case "1.20.2":
+                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.2-11.0.0-RC1435/spongevanilla-1.20.2-11.0.0-RC1435-universal.jar");
+                case "1.20.1":
+                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1365/spongevanilla-1.20.1-11.0.0-RC1365-universal.jar");
+                case "1.19.4":
+                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.4-10.0.0-RC1439/spongevanilla-1.19.4-10.0.0-RC1439-universal.jar");
                 case "1.19.3":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.3-10.0.0-RC1262/spongevanilla-1.19.3-10.0.0-RC1262-universal.jar");
+                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.3-10.0.0-RC1277/spongevanilla-1.19.3-10.0.0-RC1277-universal.jar");
                 case "1.19.2":
                     return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.2-10.0.0-RC1239/spongevanilla-1.19.2-10.0.0-RC1239-universal.jar");
                 case "1.18.2":
@@ -451,8 +468,12 @@ public class NetworkClient {
 
     public static URL getWaterdogPEURL() {
         try {
-            return new URL("https://jenkins.waterdog.dev/job/Waterdog/job/WaterdogPE/job/release/lastStableBuild/artifact/target/Waterdog.jar");
-        } catch (MalformedURLException e) {
+            Document document = Jsoup.connect("https://github.com/WaterdogPE/WaterdogPE/releases/latest").get();
+
+            Element element = document.selectFirst("#repo-content-pjax-container > div > nav > ol > li.breadcrumb-item.breadcrumb-item-selected > a");
+
+            return new URL("https://github.com/WaterdogPE/WaterdogPE/releases/download/" + element.text() + "/Waterdog.jar");
+        } catch (IOException e) {
 
         }
 
@@ -461,7 +482,7 @@ public class NetworkClient {
 
     public static URL getPocketMinePHPURL() {
         try {
-            return new URL("https://jenkins.pmmp.io/job/PHP-8.0-Aggregate/lastStableBuild/artifact/PHP-8.0-Windows-x64.zip");
+            return new URL("https://github.com/pmmp/PHP-Binaries/releases/download/php-8.1-latest/PHP-Windows-x64-PM5.zip");
         } catch (MalformedURLException e) {
 
         }
