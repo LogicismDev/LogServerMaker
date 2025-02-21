@@ -217,7 +217,7 @@ public class NetworkClient {
 
     public static URL getPaperURL(String version) {
         try {
-            BrowserData bd = executeGETRequest(new URL("https://papermc.io/api/v2/projects/paper/versions/" + version));
+            BrowserData bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/paper/versions/" + version));
 
             BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             String s;
@@ -231,7 +231,7 @@ public class NetworkClient {
 
             int latestBuild = builds.getInt(builds.length() - 1);
 
-            return new URL("https://papermc.io/api/v2/projects/paper/versions/" + version + "/builds/" + latestBuild + "/downloads/paper-" + version + "-" + latestBuild + ".jar");
+            return new URL("https://api.papermc.io/v2/projects/paper/versions/" + version + "/builds/" + latestBuild + "/downloads/paper-" + version + "-" + latestBuild + ".jar");
         } catch (IOException e) {
 
         }
@@ -351,7 +351,7 @@ public class NetworkClient {
 
     public static URL getWaterfallURL() {
         try {
-            BrowserData bd = executeGETRequest(new URL("https://papermc.io/api/v2/projects/waterfall"));
+            BrowserData bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/waterfall"));
 
             BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             String s;
@@ -365,7 +365,7 @@ public class NetworkClient {
 
             String latestVersion = versions.getString(versions.length() - 1);
 
-            bd = executeGETRequest(new URL("https://papermc.io/api/v2/projects/waterfall/versions/" + latestVersion));
+            bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/waterfall/versions/" + latestVersion));
 
             br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             sb = new StringBuilder();
@@ -378,7 +378,7 @@ public class NetworkClient {
 
             int latestBuild = builds.getInt(builds.length() - 1);
 
-            return new URL("https://papermc.io/api/v2/projects/waterfall/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
+            return new URL("https://api.papermc.io/v2/projects/waterfall/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
         } catch (IOException e) {
 
         }
@@ -388,7 +388,7 @@ public class NetworkClient {
 
     public static URL getVelocityURL() {
         try {
-            BrowserData bd = executeGETRequest(new URL("https://papermc.io/api/v2/projects/velocity"));
+            BrowserData bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/velocity"));
 
             BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             String s;
@@ -402,7 +402,7 @@ public class NetworkClient {
 
             String latestVersion = versions.getString(versions.length() - 1);
 
-            bd = executeGETRequest(new URL("https://papermc.io/api/v2/projects/velocity/versions/" + latestVersion));
+            bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/velocity/versions/" + latestVersion));
 
             br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             sb = new StringBuilder();
@@ -415,7 +415,7 @@ public class NetworkClient {
 
             int latestBuild = builds.getInt(builds.length() - 1);
 
-            return new URL("https://papermc.io/api/v2/projects/velocity/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
+            return new URL("https://api.papermc.io/v2/projects/velocity/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
         } catch (IOException e) {
 
         }

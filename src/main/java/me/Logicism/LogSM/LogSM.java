@@ -72,7 +72,7 @@ public class LogSM {
                 vanillaVersions.add(versions.getJSONObject(i).getString("id"));
             }
 
-            bd = NetworkClient.executeGETRequest(new URL("https://papermc.io/api/v2/projects/paper"));
+            bd = NetworkClient.executeGETRequest(new URL("https://api.papermc.io/v2/projects/paper"));
 
             br = new BufferedReader(new InputStreamReader(bd.getResponse()));
             sb = new StringBuilder();
