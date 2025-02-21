@@ -20,16 +20,6 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>4thline-repo</id>
-            <url>http://4thline.org/m2</url>
-            <snapshots>
-                <enabled>false</enabled> <!-- Or true, if you like to use unreleased code -->
-            </snapshots>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.json</groupId>
@@ -67,14 +57,9 @@
             <version>1.15.4</version>
         </dependency>
         <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-core</artifactId>
-            <version>2.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-support</artifactId>
-            <version>2.1.2</version>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp</artifactId>
+            <version>3.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.bitlet</groupId>
@@ -85,6 +70,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.simtechdata</groupId>
+            <artifactId>WaifUPnP</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

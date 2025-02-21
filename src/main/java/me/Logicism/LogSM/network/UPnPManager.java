@@ -5,14 +5,20 @@ import me.Logicism.LogSM.LogSM;
 import me.Logicism.LogSM.core.Server;
 import org.bitlet.weupnp.GatewayDevice;
 import org.bitlet.weupnp.GatewayDiscover;
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
-import org.fourthline.cling.support.model.PortMapping;
+import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceImpl;
+import org.jupnp.controlpoint.ActionCallback;
+import org.jupnp.model.action.ActionInvocation;
+import org.jupnp.model.message.UpnpResponse;
+import org.jupnp.model.meta.Action;
+import org.jupnp.model.meta.RemoteDevice;
+import org.jupnp.model.meta.RemoteService;
+import org.jupnp.model.types.UDAServiceType;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class UPnPManager {
 
@@ -22,11 +28,51 @@ public class UPnPManager {
     private boolean isUDPOpen = false;
 
     public void openTCPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling")) {
-            PortMapping portMapping = new PortMapping(port, ip, PortMapping.Protocol.TCP, "LogServerMaker (" + server.getName() + ")");
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+            service = new UpnpServiceImpl();
 
-            service = new UpnpServiceImpl(new PortMappingListener(portMapping));
             service.getControlPoint().search();
+
+            RemoteDevice gateway = null;
+            for (RemoteDevice device : service.getRegistry().getRemoteDevices()) {
+                if (device.getType().getType().equals("InternetGatewayDevice")) {
+                    gateway = device;
+                    break;
+                }
+            }
+
+            if (gateway != null) {
+                RemoteService wanService = gateway.findService(new UDAServiceType("WANIPConnection", 1));
+
+                if (wanService != null) {
+                    Action portMappingAction = wanService.getAction("AddPortMapping");
+
+                    if (portMappingAction != null) {
+                        ActionInvocation<RemoteService> invocation = new ActionInvocation<>(portMappingAction);
+
+                        invocation.setInput("NewRemoteHost", "");
+                        invocation.setInput("NewExternalPort", port);
+                        invocation.setInput("NewProtocol", "TCP");
+                        invocation.setInput("NewInternalPort", port);
+                        invocation.setInput("NewInternalClient", ip);
+                        invocation.setInput("NewEnabled", true);
+                        invocation.setInput("NewPortMappingDescription", "LogServerMaker (" + server.getName() + ")");
+                        invocation.setInput("NewLeaseDuration", 0);
+
+                        service.getControlPoint().execute(new ActionCallback(invocation) {
+                            @Override
+                            public void success(ActionInvocation actionInvocation) {
+
+                            }
+
+                            @Override
+                            public void failure(ActionInvocation actionInvocation, UpnpResponse upnpResponse, String s) {
+
+                            }
+                        });
+                    }
+                }
+            }
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {
             UPnP.openPortTCP(port);
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("weupnp")) {
@@ -47,7 +93,7 @@ public class UPnPManager {
     }
 
     public void closeTCPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service.shutdown();
             service = null;
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {
@@ -66,11 +112,51 @@ public class UPnPManager {
     }
 
     public void openUDPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling")) {
-            PortMapping portMapping = new PortMapping(port, ip, PortMapping.Protocol.UDP, "LogServerMaker (" + server.getName() + ")");
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+            service = new UpnpServiceImpl();
 
-            service = new UpnpServiceImpl(new PortMappingListener(portMapping));
             service.getControlPoint().search();
+
+            RemoteDevice gateway = null;
+            for (RemoteDevice device : service.getRegistry().getRemoteDevices()) {
+                if (device.getType().getType().equals("InternetGatewayDevice")) {
+                    gateway = device;
+                    break;
+                }
+            }
+
+            if (gateway != null) {
+                RemoteService wanService = gateway.findService(new UDAServiceType("WANIPConnection", 1));
+
+                if (wanService != null) {
+                    Action portMappingAction = wanService.getAction("AddPortMapping");
+
+                    if (portMappingAction != null) {
+                        ActionInvocation<RemoteService> invocation = new ActionInvocation<>(portMappingAction);
+
+                        invocation.setInput("NewRemoteHost", "");
+                        invocation.setInput("NewExternalPort", port);
+                        invocation.setInput("NewProtocol", "UDP");
+                        invocation.setInput("NewInternalPort", port);
+                        invocation.setInput("NewInternalClient", ip);
+                        invocation.setInput("NewEnabled", true);
+                        invocation.setInput("NewPortMappingDescription", "LogServerMaker (" + server.getName() + ")");
+                        invocation.setInput("NewLeaseDuration", 0);
+
+                        service.getControlPoint().execute(new ActionCallback(invocation) {
+                            @Override
+                            public void success(ActionInvocation actionInvocation) {
+
+                            }
+
+                            @Override
+                            public void failure(ActionInvocation actionInvocation, UpnpResponse upnpResponse, String s) {
+
+                            }
+                        });
+                    }
+                }
+            }
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {
             UPnP.openPortUDP(port);
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("weupnp")) {
@@ -91,7 +177,7 @@ public class UPnPManager {
     }
 
     public void closeUDPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service.shutdown();
             service = null;
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {
