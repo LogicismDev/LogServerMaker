@@ -494,7 +494,7 @@ public class ServerPage extends JFrame {
                     FileOutputStream fos = new FileOutputStream(serverProperties);
                     config.store(fos, null);
                     fos.flush();
-                    fos.close();    
+                    fos.close();
 
                     server.save();
 
@@ -548,8 +548,9 @@ public class ServerPage extends JFrame {
                         } else {
                             File serverJar = new File("servers/" + server.getDirName() + "/server.jar");
                             File forgeServerDir = new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge");
+                            File neoForgeServerDir = new File("servers/" + server.getDirName() + "/libraries/net/neoforged/neoforge");
 
-                            if (!(forgeServerDir.exists() && server.getServerType().equals(ServerType.Forge)) && !serverJar.exists()) {
+                            if (!(forgeServerDir.exists()) && (server.getServerType().equals(ServerType.Forge)) || !(neoForgeServerDir.exists()) && (server.getServerType().equals(ServerType.NeoForge)) && !serverJar.exists()) {
                                 JOptionPane.showMessageDialog(null, "You must download the server software before you can run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                 return;
                             } else {
@@ -577,7 +578,7 @@ public class ServerPage extends JFrame {
                                         }
                                     }
 
-                                    startServer(server, serverProperties, forgeServerDir.exists());
+                                    startServer(server, serverProperties, forgeServerDir.exists() || neoForgeServerDir.exists());
                                 } else {
                                     JOptionPane.showMessageDialog(null, "You must agree to the EULA to run the server.", "LogSM", JOptionPane.ERROR_MESSAGE);
                                     return;
@@ -665,20 +666,26 @@ public class ServerPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (server.getServerType().equals(ServerType.Forge)) {
                     JOptionPane.showMessageDialog(null, "You must download the forge server files manually. (If you are unsure where to install, click on Open Server Files to open the directory to install.) You must rename the forge jar to server.jar", "LogSM", JOptionPane.ERROR_MESSAGE);
+                } else if (server.getServerType().equals(ServerType.NeoForge)) {
+                    JOptionPane.showMessageDialog(null, "You must download the neoforge server files manually. (If you are unsure where to install, click on Open Server Files to open the directory to install.) You must rename the neoforge jar to server.jar", "LogSM", JOptionPane.ERROR_MESSAGE);
                 } else if (server.getServerType().equals(ServerType.Fabric)) {
                     JOptionPane.showMessageDialog(null, "You must download and use the fabric installer to install the files to the server directory manually. (If you are unsure where to install, click on Open Server Files to open the directory to install.)", "LogSM", JOptionPane.ERROR_MESSAGE);
                 } else {
                     UpdaterDialog updaterDialog = switch (server.getServerType()) {
-                        case Vanilla -> new UpdaterDialog(server, NetworkClient.getMojangServerURL(server.getVersion()), null);
-                        case CraftBukkit -> new UpdaterDialog(server, NetworkClient.getCraftBukkitURL(server.getVersion()), null);
+                        case Vanilla ->
+                                new UpdaterDialog(server, NetworkClient.getMojangServerURL(server.getVersion()), null);
+                        case CraftBukkit ->
+                                new UpdaterDialog(server, NetworkClient.getCraftBukkitURL(server.getVersion()), null);
                         case Paper -> new UpdaterDialog(server, NetworkClient.getPaperURL(server.getVersion()), null);
                         case Purpur -> new UpdaterDialog(server, NetworkClient.getPurpurURL(server.getVersion()), null);
                         case Spigot -> new UpdaterDialog(server, NetworkClient.getSpigotURL(server.getVersion()), null);
-                        case Magma -> new UpdaterDialog(server, NetworkClient.getMagmaURL(server.getVersion()), null);
+                        case Ketting -> new UpdaterDialog(server, NetworkClient.getKettingURL(), null);
                         case Mohist -> new UpdaterDialog(server, NetworkClient.getMohistURL(server.getVersion()), null);
-                        case SpongeVanilla -> new UpdaterDialog(server, NetworkClient.getSpongeVanillaURL(server.getVersion()), null);
+                        case SpongeVanilla ->
+                                new UpdaterDialog(server, NetworkClient.getSpongeVanillaURL(server.getVersion()), null);
                         case Nukkit -> new UpdaterDialog(server, NetworkClient.getNukkitURL(), null);
-                        case PocketMine -> new UpdaterDialog(server, NetworkClient.getPocketMineURL(), NetworkClient.getPocketMinePHPURL());
+                        case PocketMine ->
+                                new UpdaterDialog(server, NetworkClient.getPocketMineURL(), NetworkClient.getPocketMinePHPURL());
                         default -> null;
                     };
                     updaterDialog.pack();
@@ -1227,7 +1234,11 @@ public class ServerPage extends JFrame {
         commands.add("-Xmx" + server.getRAM() + "M");
         commands.add("-Xms" + server.getRAM() + "M");
         if (forgeFileArgsExist) {
-            commands.add("@libraries/net/minecraftforge/forge/" + new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge").listFiles()[0].getName() + (System.getProperty("os.name").contains("Windows") ? "/win_args.txt" : "/unix_args.txt"));
+            if (server.getServerType().equals(ServerType.Forge)) {
+                commands.add("@libraries/net/minecraftforge/forge/" + new File("servers/" + server.getDirName() + "/libraries/net/minecraftforge/forge").listFiles()[0].getName() + (System.getProperty("os.name").contains("Windows") ? "/win_args.txt" : "/unix_args.txt"));
+            } else if (server.getServerType().equals(ServerType.NeoForge)) {
+                commands.add("@libraries/net/neoforged/neoforge/" + new File("servers/" + server.getDirName() + "/libraries/net/neoforged/neoforge").listFiles()[0].getName() + (System.getProperty("os.name").contains("Windows") ? "/win_args.txt" : "/unix_args.txt"));
+            }
         } else {
             commands.add("-jar");
             if (server.getServerType().equals(ServerType.Fabric)) {
@@ -1238,8 +1249,19 @@ public class ServerPage extends JFrame {
             if (server.getServerType().equals(ServerType.Nukkit)) {
                 commands.add("--disable-ansi");
             }
+            if (server.getServerType().equals(ServerType.Ketting)) {
+                commands.add("-nogui");
+                commands.add("-noui");
+                commands.add("-nologo");
+                commands.add("-accepteula");
+                commands.add("-minecraftVersion");
+                commands.add(server.getVersion());
+            } else if (server.getServerType().equals(ServerType.Limbo)) {
+                commands.add("--nogui");
+            } else {
+                commands.add("nogui");
+            }
         }
-        commands.add("nogui");
         ProcessBuilder processBuilder = new ProcessBuilder(commands);
         try {
             p = processBuilder.directory(new File("servers/" + server.getDirName())).redirectErrorStream(true).start();

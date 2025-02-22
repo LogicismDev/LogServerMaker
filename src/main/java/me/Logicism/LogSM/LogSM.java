@@ -15,6 +15,11 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
 
 import javax.swing.*;
 import java.io.*;
@@ -32,11 +37,12 @@ public class LogSM {
     public static List<String> vanillaVersions = new ArrayList<>();
     public static List<String> paperVersions = new ArrayList<>();
     public static List<String> purpurVersions = new ArrayList<>();
-    public static List<String> spigotVersions = Arrays.asList("1.20.2", "1.20.1", "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19", "1.18.2", "1.18.1", "1.18", "1.17.1", "1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1", "1.14", "1.13.2", "1.13.1", "1.13", "1.12.2", "1.12.1", "1.12", "1.11.2", "1.11.1", "1.11", "1.10.2", "1.10", "1.9.4", "1.9.2", "1.9.1", "1.9", "1.8.8", "1.8.7", "1.8.6", "1.8.5", "1.8.4", "1.8.3", "1.8.2", "1.8.1", "1.8", "1.7.10");
-    public static List<String> forgeVersions = Arrays.asList("1.20.2", "1.20.1", "1.20", "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19", "1.18.2", "1.18.1", "1.18", "1.17.1", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.13.2", "1.12.2", "1.12.1", "1.12", "1.11.2", "1.11", "1.10.2", "1.10", "1.9.4", "1.9", "1.8.9", "1.8.8", "1.8", "1.7.10");
-    public static List<String> magmaVersions = Arrays.asList("1.19.3", "1.18.2", "1.16.5", "1.12.2");
+    public static List<String> spigotVersions = Arrays.asList("1.21", "1.20.6", "1.20.4", "1.20.2", "1.20.1", "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19", "1.18.2", "1.18.1", "1.18", "1.17.1", "1.17", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.15.2", "1.15.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.14.1", "1.14", "1.13.2", "1.13.1", "1.13", "1.12.2", "1.12.1", "1.12", "1.11.2", "1.11.1", "1.11", "1.10.2", "1.10", "1.9.4", "1.9.2", "1.9.1", "1.9", "1.8.8", "1.8.7", "1.8.6", "1.8.5", "1.8.4", "1.8.3", "1.8.2", "1.8.1", "1.8", "1.7.10");
+    public static List<String> forgeVersions = Arrays.asList("1.21.4", "1.21.3", "1.21.1", "1.21", "1.20.6", "1.20.4", "1.20.3", "1.20.2", "1.20.1", "1.20", "1.19.4", "1.19.3", "1.19.2", "1.19.1", "1.19", "1.18.2", "1.18.1", "1.18", "1.17.1", "1.16.5", "1.16.4", "1.16.3", "1.16.2", "1.16.1", "1.15", "1.14.4", "1.14.3", "1.14.2", "1.13.2", "1.12.2", "1.12.1", "1.12", "1.11.2", "1.11", "1.10.2", "1.10", "1.9.4", "1.9", "1.8.9", "1.8.8", "1.8", "1.7.10");
+    public static List<String> neoForgeVersions = new ArrayList<>();
+    public static List<String> kettingVersions = new ArrayList<>();
     public static List<String> mohistVersions = new ArrayList<>();
-    public static List<String> spongeVanillaVersions = Arrays.asList("1.20.2", "1.20.1", "1.19.4", "1.19.3", "1.19.2", "1.18.2", "1.18.1", "1.17.1", "1.16.5", "1.16.4", "1.15.2", "1.12.2", "1.11.2", "1.10.2", "1.9.4", "1.8.9");
+    public static List<String> spongeVanillaVersions = new ArrayList<>();
     public static List<String> fabricVersions = new ArrayList<>();
 
     public static String VERSION = "3.6";
@@ -106,6 +112,52 @@ public class LogSM {
 
             Collections.reverse(purpurVersions);
 
+            bd = NetworkClient.executeGETRequest(new URL("https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/neoforge"));
+
+            br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+
+            bd.getResponse().close();
+
+            jsonObject = new JSONObject(sb.toString());
+            versions = jsonObject.getJSONArray("versions");
+            for (int i = versions.length(); i > 0; i--) {
+                String version = "1.";
+                version += versions.getString(i - 1).split("\\.")[0] + "." + versions.getString(i - 1).split("\\.")[1];
+
+                if (!neoForgeVersions.contains(version)) {
+                    neoForgeVersions.add(0, version);
+                }
+            }
+
+            Collections.reverse(neoForgeVersions);
+
+            bd = NetworkClient.executeGETRequest(new URL("https://reposilite.c0d3m4513r.com/Ketting-Server-Releases/org/kettingpowered/server/forge/maven-metadata.xml"));
+
+            br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+
+            bd.getResponse().close();
+
+            Document document = Jsoup.parse(sb.toString(), "", Parser.xmlParser());
+            Elements elements = document.getElementsByTag("version");
+            for (Element element : elements) {
+                String version = element.text().split("-")[0];
+
+                if (!kettingVersions.contains(version)) {
+                    kettingVersions.add(0, version);
+                }
+            }
+
+            Collections.sort(kettingVersions);
+            Collections.reverse(kettingVersions);
+
             bd = NetworkClient.executeGETRequest(new URL("https://mohistmc.com/api/v2/projects/mohist"));
 
             br = new BufferedReader(new InputStreamReader(bd.getResponse()));
@@ -123,6 +175,22 @@ public class LogSM {
             }
 
             Collections.reverse(mohistVersions);
+
+            bd = NetworkClient.executeGETRequest(new URL("https://dl-api.spongepowered.org/v2/groups/org.spongepowered/artifacts/spongevanilla"));
+
+            br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+
+            bd.getResponse().close();
+
+            jsonObject = new JSONObject(sb.toString());
+            versions = jsonObject.getJSONObject("tags").getJSONArray("minecraft");
+            for (int i = 0; i < versions.length(); i++) {
+                spongeVanillaVersions.add(versions.getString(i));
+            }
 
             bd = NetworkClient.executeGETRequest(new URL("https://meta.fabricmc.net/v2/versions/game"));
 

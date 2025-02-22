@@ -96,6 +96,9 @@ public class NetworkClient {
     public static URL getCraftBukkitURL(String version) {
         try {
             switch (version) {
+                case "1.21":
+                case "1.20.6":
+                case "1.20.4":
                 case "1.20.2":
                 case "1.20.1":
                 case "1.19.4":
@@ -157,6 +160,9 @@ public class NetworkClient {
     public static URL getSpigotURL(String version) {
         try {
             switch (version) {
+                case "1.21":
+                case "1.20.6":
+                case "1.20.4":
                 case "1.20.2":
                 case "1.20.1":
                 case "1.19.4":
@@ -249,16 +255,14 @@ public class NetworkClient {
         return null;
     }
 
-    public static URL getMagmaURL(String version) {
+    public static URL getKettingURL() {
         try {
-            switch (version) {
-                case "1.19.3":
-                case "1.18.2":
-                case "1.16.5":
-                case "1.12.2":
-                    return new URL("https://api.magmafoundation.org/api/v2/" + version + "/latest/download");
-            }
-        } catch (MalformedURLException e) {
+            Document document = Jsoup.connect("https://github.com/kettingpowered/kettinglauncher/releases/latest").get();
+
+            Element element = document.selectFirst("#repo-content-pjax-container > div > nav > ol > li.breadcrumb-item.breadcrumb-item-selected > a");
+
+            return new URL("https://github.com/kettingpowered/kettinglauncher/releases/download/" + element.text() + "/kettinglauncher-" + element.text().replace("v", "") + ".jar");
+        } catch (IOException e) {
 
         }
 
@@ -349,43 +353,6 @@ public class NetworkClient {
         return null;
     }
 
-    public static URL getWaterfallURL() {
-        try {
-            BrowserData bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/waterfall"));
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
-            String s;
-            StringBuilder sb = new StringBuilder();
-            while ((s = br.readLine()) != null) {
-                sb.append(s);
-            }
-
-            JSONObject jsonObject = new JSONObject(sb.toString());
-            JSONArray versions = jsonObject.getJSONArray("versions");
-
-            String latestVersion = versions.getString(versions.length() - 1);
-
-            bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/waterfall/versions/" + latestVersion));
-
-            br = new BufferedReader(new InputStreamReader(bd.getResponse()));
-            sb = new StringBuilder();
-            while ((s = br.readLine()) != null) {
-                sb.append(s);
-            }
-
-            jsonObject = new JSONObject(sb.toString());
-            JSONArray builds = jsonObject.getJSONArray("builds");
-
-            int latestBuild = builds.getInt(builds.length() - 1);
-
-            return new URL("https://api.papermc.io/v2/projects/waterfall/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
-        } catch (IOException e) {
-
-        }
-
-        return null;
-    }
-
     public static URL getVelocityURL() {
         try {
             BrowserData bd = executeGETRequest(new URL("https://api.papermc.io/v2/projects/velocity"));
@@ -415,7 +382,7 @@ public class NetworkClient {
 
             int latestBuild = builds.getInt(builds.length() - 1);
 
-            return new URL("https://api.papermc.io/v2/projects/velocity/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/waterfall-" + latestVersion + "-" + latestBuild + ".jar");
+            return new URL("https://api.papermc.io/v2/projects/velocity/versions/" + latestVersion + "/builds/" + latestBuild + "/downloads/velocity-" + latestVersion + "-" + latestBuild + ".jar");
         } catch (IOException e) {
 
         }
@@ -425,41 +392,37 @@ public class NetworkClient {
 
     public static URL getSpongeVanillaURL(String version) {
         try {
-            switch (version) {
-                case "1.20.2":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.2-11.0.0-RC1435/spongevanilla-1.20.2-11.0.0-RC1435-universal.jar");
-                case "1.20.1":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.20.1-11.0.0-RC1365/spongevanilla-1.20.1-11.0.0-RC1365-universal.jar");
-                case "1.19.4":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.4-10.0.0-RC1439/spongevanilla-1.19.4-10.0.0-RC1439-universal.jar");
-                case "1.19.3":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.3-10.0.0-RC1277/spongevanilla-1.19.3-10.0.0-RC1277-universal.jar");
-                case "1.19.2":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.19.2-10.0.0-RC1239/spongevanilla-1.19.2-10.0.0-RC1239-universal.jar");
-                case "1.18.2":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.18.2-9.0.0-RC1157/spongevanilla-1.18.2-9.0.0-RC1157-universal.jar");
-                case "1.18.1":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.18.1-9.0.0-RC1119/spongevanilla-1.18.1-9.0.0-RC1119-universal.jar");
-                case "1.17.1":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.17.1-9.0.0-RC977/spongevanilla-1.17.1-9.0.0-RC977-universal.jar");
-                case "1.16.5":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.16.5-8.0.0-RC1118/spongevanilla-1.16.5-8.0.0-RC1118-universal.jar");
-                case "1.16.4":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.16.4-8.0.0-RC390/spongevanilla-1.16.4-8.0.0-RC390-universal.jar");
-                case "1.15.2":
-                    return new URL("https://repo.spongepowered.org/repository/maven-snapshots/org/spongepowered/spongevanilla/1.15.2-8.0.0-SNAPSHOT/spongevanilla-1.15.2-8.0.0-20201201.044712-3-universal.jar");
-                case "1.12.2":
-                    return new URL("https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongevanilla/1.12.2-7.4.7/spongevanilla-1.12.2-7.4.7.jar");
-                case "1.11.2":
-                    return new URL("https://repo.spongepowered.org/repository/legacy-transfer/org/spongepowered/spongevanilla/1.11.2-6.1.0-BETA-27/spongevanilla-1.11.2-6.1.0-BETA-27.jar");
-                case "1.10.2":
-                    return new URL("https://repo.spongepowered.org/repository/legacy-transfer/org/spongepowered/spongevanilla/1.10.2-5.2.0-BETA-403/spongevanilla-1.10.2-5.2.0-BETA-403.jar");
-                case "1.9.4":
-                    return new URL("https://repo.spongepowered.org/repository/legacy-transfer/org/spongepowered/spongevanilla/1.9.4-5.0.0-BETA-83/spongevanilla-1.9.4-5.0.0-BETA-83.jar");
-                case "1.8.9":
-                    return new URL("https://repo.spongepowered.org/repository/legacy-transfer/org/spongepowered/spongevanilla/1.8.9-4.2.0-BETA-352/spongevanilla-1.8.9-4.2.0-BETA-352.jar");
+            BrowserData bd = executeGETRequest(new URL("https://dl-api.spongepowered.org/v2/groups/org.spongepowered/artifacts/spongevanilla/versions?tags=,minecraft:" + version + "&offset=0&limit=1"));
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            String s;
+            StringBuilder sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
             }
-        } catch (MalformedURLException e) {
+
+            JSONObject jsonObject = new JSONObject(sb.toString());
+            JSONObject builds = jsonObject.getJSONObject("artifacts");
+            String build = builds.keys().next();
+
+            bd = executeGETRequest(new URL("https://dl-api.spongepowered.org/v2/groups/org.spongepowered/artifacts/spongevanilla/versions/" + build));
+
+            br = new BufferedReader(new InputStreamReader(bd.getResponse()));
+            sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+
+            jsonObject = new JSONObject(sb.toString());
+
+            for (int i = 0; i < jsonObject.getJSONArray("assets").length(); i++) {
+                JSONObject downloadObject = jsonObject.getJSONArray("assets").getJSONObject(i);
+
+                if (downloadObject.getString("classifier").equals("universal")) {
+                    return new URL(downloadObject.getString("downloadUrl"));
+                }
+            }
+        } catch (IOException e) {
 
         }
 

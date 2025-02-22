@@ -356,7 +356,6 @@ public class ConfigServerPage extends JFrame {
                     case Geyser -> new UpdaterDialog(server, NetworkClient.getGeyserURL(), null);
                     case BungeeCord -> new UpdaterDialog(server, NetworkClient.getBungeeCordURL(), null);
                     case NanoLimbo -> new UpdaterDialog(server, NetworkClient.getNanoLimboURL(), null);
-                    case Waterfall -> new UpdaterDialog(server, NetworkClient.getWaterfallURL(), null);
                     case Velocity -> new UpdaterDialog(server, NetworkClient.getVelocityURL(), null);
                     case WaterdogPE -> new UpdaterDialog(server, NetworkClient.getWaterdogPEURL(), null);
                     default -> null;
@@ -378,7 +377,9 @@ public class ConfigServerPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 File file;
-                if (server.getServerType().equals(ServerType.Velocity)) {
+                if (server.getServerType().equals(ServerType.Limbo)) {
+                    file = new File("servers/" + server.getDirName() + "/server.properties");
+                } else if (server.getServerType().equals(ServerType.Velocity)) {
                     file = new File("servers/" + server.getDirName() + "/velocity.toml");
                 } else if (server.getServerType().equals(ServerType.NanoLimbo)) {
                     file = new File("servers/" + server.getDirName() + "/settings.yml");

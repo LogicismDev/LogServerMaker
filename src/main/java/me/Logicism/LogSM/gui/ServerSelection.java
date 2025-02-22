@@ -221,7 +221,7 @@ public class ServerSelection extends JFrame {
                         page.pack();
                         page.setLocationRelativeTo(null);
                         page.setVisible(true);
-                    } else if (server.getServerType().equals(ServerType.Geyser) || server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.NanoLimbo) || server.getServerType().equals(ServerType.Waterfall) || server.getServerType().equals(ServerType.Velocity) || server.getServerType().equals(ServerType.WaterdogPE)) {
+                    } else if (server.getServerType().equals(ServerType.Geyser) || server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.NanoLimbo) || server.getServerType().equals(ServerType.Velocity) || server.getServerType().equals(ServerType.WaterdogPE)) {
                         ConfigServerPage page = new ConfigServerPage(server);
                         page.pack();
                         page.setLocationRelativeTo(null);

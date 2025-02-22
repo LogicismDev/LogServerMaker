@@ -169,7 +169,7 @@ public class ServerThread implements Runnable {
                                     @Override
                                     public void run() {
                                         autoRestartSeconds--;
-                                        if (server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.Waterfall)) {
+                                        if (server.getServerType().equals(ServerType.BungeeCord)) {
                                             if (autoRestartSeconds == 900) {
                                                 try {
                                                     dos.writeUTF("alert **SERVER RESTARTS IN 15 MINUTES**");
@@ -223,7 +223,7 @@ public class ServerThread implements Runnable {
                         }
                     }
 
-                    if ((server.getServerType().equals(ServerType.Vanilla) || server.getServerType().equals(ServerType.CraftBukkit) || server.getServerType().equals(ServerType.Spigot) || server.getServerType().equals(ServerType.Paper) || server.getServerType().equals(ServerType.Purpur) || server.getServerType().equals(ServerType.Forge) || server.getServerType().equals(ServerType.SpongeVanilla) || server.getServerType().equals(ServerType.Fabric) || server.getServerType().equals(ServerType.Nukkit) || server.getServerType().equals(ServerType.PocketMine)) && line.contains("logged in with entity id")) {
+                    if ((server.getServerType().equals(ServerType.Vanilla) || server.getServerType().equals(ServerType.CraftBukkit) || server.getServerType().equals(ServerType.Spigot) || server.getServerType().equals(ServerType.Paper) || server.getServerType().equals(ServerType.Purpur) || server.getServerType().equals(ServerType.Forge) || server.getServerType().equals(ServerType.NeoForge) || server.getServerType().equals(ServerType.Ketting) || server.getServerType().equals(ServerType.Mohist) || server.getServerType().equals(ServerType.SpongeVanilla) || server.getServerType().equals(ServerType.Fabric) || server.getServerType().equals(ServerType.Nukkit) || server.getServerType().equals(ServerType.PocketMine)) && line.contains("logged in with entity id")) {
                         String username;
                         if (server.getServerType().equals(ServerType.Nukkit)) {
                             username = line.split("\\[/")[0].split("] ")[1];
@@ -237,7 +237,7 @@ public class ServerThread implements Runnable {
                     } else if (server.getServerType().equals(ServerType.Geyser) && line.contains("(logged in as: ") && line.contains("has connected to remote java server on address")) {
                         String username = line.split(" \\(logged")[0].split("] ")[1];
                         dlm.addElement(username);
-                    } else if (((server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.Waterfall) || server.getServerType().equals(ServerType.WaterdogPE))) && line.contains("] <->")) {
+                    } else if (((server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.WaterdogPE))) && line.contains("] <->")) {
                         String username = line.split("] <->")[0].split("INFO] \\[")[1].split("\\|")[0];
                         dlm.addElement(username);
                     } else if (server.getServerType().equals(ServerType.Velocity) && line.contains("INFO]: [connected player] ") && line.contains("has connected")) {
@@ -250,7 +250,7 @@ public class ServerThread implements Runnable {
                         dlm.addElement(username);
                     }
 
-                    if ((server.getServerType().equals(ServerType.Vanilla) || server.getServerType().equals(ServerType.CraftBukkit) || server.getServerType().equals(ServerType.Spigot) || server.getServerType().equals(ServerType.Paper) || server.getServerType().equals(ServerType.Purpur) || server.getServerType().equals(ServerType.Forge) || server.getServerType().equals(ServerType.SpongeVanilla) || server.getServerType().equals(ServerType.Fabric)) && line.contains("lost connection: ")) {
+                    if ((server.getServerType().equals(ServerType.Vanilla) || server.getServerType().equals(ServerType.CraftBukkit) || server.getServerType().equals(ServerType.Spigot) || server.getServerType().equals(ServerType.Paper) || server.getServerType().equals(ServerType.Purpur) || server.getServerType().equals(ServerType.Forge) || server.getServerType().equals(ServerType.NeoForge) || server.getServerType().equals(ServerType.Ketting) || server.getServerType().equals(ServerType.Mohist) || server.getServerType().equals(ServerType.SpongeVanilla) || server.getServerType().equals(ServerType.Fabric)) && line.contains("lost connection: ")) {
                         String username = line.split(" lost connection: ")[0].split(": ")[1];
                         dlm.removeElement(username);
                     } else if ((server.getServerType().equals(ServerType.Nukkit) || server.getServerType().equals(ServerType.PocketMine)) && line.contains(" logged out due to")) {
@@ -267,7 +267,7 @@ public class ServerThread implements Runnable {
                     } else if (server.getServerType().equals(ServerType.Geyser) && line.contains("has disconnected from remote Java server on address")) {
                         String username = line.split(" has disconnected")[0].split("] ")[1];
                         dlm.removeElement(username);
-                    } else if (((server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.Waterfall) || server.getServerType().equals(ServerType.WaterdogPE))) && line.contains("] <->")) {
+                    } else if (((server.getServerType().equals(ServerType.BungeeCord) || server.getServerType().equals(ServerType.WaterdogPE))) && line.contains("] <->")) {
                         String username = line.split("] -> UpstreamBridge has disconnected")[0].split("INFO] \\[")[1].split("\\|")[1];
                         dlm.removeElement(username);
                     } else if (server.getServerType().equals(ServerType.Velocity) && line.contains("INFO]: [connected player] ") && line.contains("has disconnected")) {

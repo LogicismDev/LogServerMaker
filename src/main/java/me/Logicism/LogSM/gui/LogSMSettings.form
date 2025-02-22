@@ -85,7 +85,7 @@
             </constraints>
             <properties>
               <model>
-                <item value="Cling"/>
+                <item value="jUPnP"/>
                 <item value="WaifUPnP"/>
                 <item value="weupnp"/>
               </model>

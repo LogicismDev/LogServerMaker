@@ -75,14 +75,6 @@ public class ServerEditDialog extends JDialog {
             if (!comboBox2.isEnabled()) {
                 comboBox2.setEnabled(true);
             }
-        } else if (comboBox1.getSelectedItem().equals("Magma")) {
-            for (String s : LogSM.magmaVersions) {
-                comboBox2.addItem(s);
-            }
-
-            if (!comboBox2.isEnabled()) {
-                comboBox2.setEnabled(true);
-            }
         } else if (comboBox1.getSelectedItem().equals("Mohist")) {
             for (String s : LogSM.mohistVersions) {
                 comboBox2.addItem(s);
@@ -107,7 +99,7 @@ public class ServerEditDialog extends JDialog {
             if (!comboBox2.isEnabled()) {
                 comboBox2.setEnabled(true);
             }
-        } else if (comboBox1.getSelectedItem().equals("Nukkit") || comboBox1.getSelectedItem().equals("PocketMine") || comboBox1.getSelectedItem().equals("Bedrock") || comboBox1.getSelectedItem().equals("Geyser") || comboBox1.getSelectedItem().equals("BungeeCord") || comboBox1.getSelectedItem().equals("NanoLimbo") || comboBox1.getSelectedItem().equals("Waterfall") || comboBox1.getSelectedItem().equals("Waterdog") || comboBox1.getSelectedItem().equals("Velocity") || comboBox1.getSelectedItem().equals("WaterdogPE")) {
+        } else if (comboBox1.getSelectedItem().equals("Nukkit") || comboBox1.getSelectedItem().equals("PocketMine") || comboBox1.getSelectedItem().equals("Bedrock") || comboBox1.getSelectedItem().equals("Geyser") || comboBox1.getSelectedItem().equals("BungeeCord") || comboBox1.getSelectedItem().equals("NanoLimbo") || comboBox1.getSelectedItem().equals("Waterdog") || comboBox1.getSelectedItem().equals("Velocity") || comboBox1.getSelectedItem().equals("WaterdogPE")) {
             comboBox2.setEnabled(false);
         }
 
@@ -158,8 +150,16 @@ public class ServerEditDialog extends JDialog {
                     if (!comboBox2.isEnabled()) {
                         comboBox2.setEnabled(true);
                     }
-                } else if (comboBox1.getSelectedItem().equals("Magma")) {
-                    for (String s : LogSM.magmaVersions) {
+                } else if (comboBox1.getSelectedItem().equals("NeoForge")) {
+                    for (String s : LogSM.neoForgeVersions) {
+                        comboBox2.addItem(s);
+                    }
+
+                    if (!comboBox2.isEnabled()) {
+                        comboBox2.setEnabled(true);
+                    }
+                } else if (comboBox1.getSelectedItem().equals("Ketting")) {
+                    for (String s : LogSM.kettingVersions) {
                         comboBox2.addItem(s);
                     }
 
@@ -190,7 +190,7 @@ public class ServerEditDialog extends JDialog {
                     if (!comboBox2.isEnabled()) {
                         comboBox2.setEnabled(true);
                     }
-                } else if (comboBox1.getSelectedItem().equals("Nukkit") || comboBox1.getSelectedItem().equals("PocketMine") || comboBox1.getSelectedItem().equals("Bedrock") || comboBox1.getSelectedItem().equals("Geyser") || comboBox1.getSelectedItem().equals("BungeeCord") || comboBox1.getSelectedItem().equals("NanoLimbo") || comboBox1.getSelectedItem().equals("Waterfall") || comboBox1.getSelectedItem().equals("Waterdog") || comboBox1.getSelectedItem().equals("Velocity") || comboBox1.getSelectedItem().equals("WaterdogPE")) {
+                } else if (comboBox1.getSelectedItem().equals("Nukkit") || comboBox1.getSelectedItem().equals("PocketMine") || comboBox1.getSelectedItem().equals("Bedrock") || comboBox1.getSelectedItem().equals("Geyser") || comboBox1.getSelectedItem().equals("BungeeCord") || comboBox1.getSelectedItem().equals("NanoLimbo") || comboBox1.getSelectedItem().equals("Waterdog") || comboBox1.getSelectedItem().equals("Velocity") || comboBox1.getSelectedItem().equals("WaterdogPE")) {
                     comboBox2.setEnabled(false);
                 }
             }

@@ -28,7 +28,7 @@ public class UPnPManager {
     private boolean isUDPOpen = false;
 
     public void openTCPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service = new UpnpServiceImpl();
 
             service.getControlPoint().search();
@@ -93,7 +93,7 @@ public class UPnPManager {
     }
 
     public void closeTCPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service.shutdown();
             service = null;
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {
@@ -112,7 +112,7 @@ public class UPnPManager {
     }
 
     public void openUDPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service = new UpnpServiceImpl();
 
             service.getControlPoint().search();
@@ -177,7 +177,7 @@ public class UPnPManager {
     }
 
     public void closeUDPPort(Server server, String ip, int port) {
-        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
+        if (!LogSM.getSettings().containsKey("Port Forwarding Library") || LogSM.getSettings().get("Port Forwarding Library").equals("Cling") || LogSM.getSettings().get("Port Forwarding Library").equals("jUPnP")) {
             service.shutdown();
             service = null;
         } else if (LogSM.getSettings().get("Port Forwarding Library").equals("WaifUPnP")) {

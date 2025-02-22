@@ -74,7 +74,11 @@ public class LogSMSettings extends JDialog {
         }
 
         if (LogSM.getSettings().containsKey("Port Forwarding Library")) {
-            comboBox2.setSelectedItem(LogSM.getSettings().get("Port Forwarding Library"));
+            if (LogSM.getSettings().get("Port Forwarding Library").equals("Cling")) {
+                comboBox2.setSelectedItem("jUPnP");
+            } else {
+                comboBox2.setSelectedItem(LogSM.getSettings().get("Port Forwarding Library"));
+            }
         }
 
         if (Boolean.parseBoolean(LogSM.getSettings().get("Check for Updates"))) {
