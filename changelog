@@ -1,3 +1,13 @@
+3.7 - February 21, 2025
+- Change Cling UPnP Library to jUPnP. Cling is outdated and will be using jUPnP forwards on
+- Fix & Update PaperMC related Downloads
+- Add Ketting Server Type
+- Add NeoForge Server Type
+- Update SpongeVanilla to automatically grab versions
+- Remove Magma and Waterfall Server Type as it is no longer supported
+- Magma and Waterfall is now deprecated and removed from creating servers. If you try to launch one, it'll report to backup the files
+- Update to 1.21.60 Bedrock Edition
+
 3.6 - December 5, 2023
 - Add Support for Updated Forge Server Files
 - Update to 1.19.4, 1.20, 1.20.1, 1.20.2 Java Edition
@@ -24,12 +34,3 @@
 - Remove 1.18.2 Mohist Download
 - Update Mohist Download to 1.19.3
 - Added Percent and Speed Counter in Download Progress Bar
-
-3.4 - November 23, 2022
-- Fix Bedrock not Extracting
-- Update SpongeVanilla to 1.19.2
-- Update BungeeCord Download
-- Fix PocketMine Download
-- Fix NanoLimbo Download
-- Remove Airplane Server Type as it is no longer supported
-- Airplane is now deprecated and removed from creating servers. If you try to launch one, it'll report to backup the files

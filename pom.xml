@@ -6,7 +6,7 @@
 
     <groupId>me.Logicism.LogSM</groupId>
     <artifactId>LogSM</artifactId>
-    <version>3.6</version>
+    <version>3.7</version>
     <build>
         <plugins>
             <plugin>
