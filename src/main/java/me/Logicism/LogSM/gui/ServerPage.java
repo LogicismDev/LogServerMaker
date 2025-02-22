@@ -111,6 +111,14 @@ public class ServerPage extends JFrame {
     private JSpinner maxChainedNeighborUpdatesSpinner;
     private JCheckBox enableChatPreviewCheckBox;
     private JCheckBox enforceSecureProfileCheckBox;
+    private JCheckBox logIPsCheckBox;
+    private JTextField resourcePackIDTextField;
+    private JTextField bugReportLinkTextField;
+    private JSpinner textFilteringVersionSpinner;
+    private JComboBox regionFileCompressionComboBox;
+    private JSpinner pauseWhenEmptySecondsSpinner;
+    private JTextField initialDisabledPacksTextField;
+    private JTextField initialEnabledPacksTextField;
 
     private Properties config;
     private Process p;
@@ -258,6 +266,12 @@ public class ServerPage extends JFrame {
         maxChainedNeighborUpdatesSpinner.setModel(new SpinnerNumberModel(1000000, 1, 2147483647, 1));
         editor = new JSpinner.NumberEditor(maxChainedNeighborUpdatesSpinner, "#");
         maxChainedNeighborUpdatesSpinner.setEditor(editor);
+        pauseWhenEmptySecondsSpinner.setModel(new SpinnerNumberModel(60, 0, Long.MAX_VALUE, 1));
+        editor = new JSpinner.NumberEditor(pauseWhenEmptySecondsSpinner, "#");
+        pauseWhenEmptySecondsSpinner.setEditor(editor);
+        textFilteringVersionSpinner.setModel(new SpinnerNumberModel(0, 0, 1, 1));
+        editor = new JSpinner.NumberEditor(textFilteringVersionSpinner, "#");
+        textFilteringVersionSpinner.setEditor(editor);
 
         try {
             config = new Properties();
@@ -488,6 +502,28 @@ public class ServerPage extends JFrame {
                 }
                 if (maxChainedNeighborUpdatesSpinner.isEnabled()) {
                     config.setProperty("max-chained-neighbor-updates", String.valueOf(maxChainedNeighborUpdatesSpinner.getValue()));
+                }
+                if (initialDisabledPacksTextField.isEnabled()) {
+                    config.setProperty("initial-disabled-packs", initialDisabledPacksTextField.getText());
+                    config.setProperty("initial-enabled-packs", initialEnabledPacksTextField.getText());
+                }
+                if (logIPsCheckBox.isEnabled()) {
+                    config.setProperty("log-ips", LogSM.booleanToString(server.getServerType(), logIPsCheckBox.isSelected()));
+                }
+                if (resourcePackIDTextField.isEnabled()) {
+                    config.setProperty("resource-pack-id", resourcePackIDTextField.getText());
+                }
+                if (regionFileCompressionComboBox.isEnabled()) {
+                    config.setProperty("region-file-compression", regionFileCompressionComboBox.getSelectedItem().toString());
+                }
+                if (bugReportLinkTextField.isEnabled()) {
+                    config.setProperty("bug-report-link", bugReportLinkTextField.getText());
+                }
+                if (pauseWhenEmptySecondsSpinner.isEnabled()) {
+                    config.setProperty("pause-when-empty-seconds", String.valueOf(pauseWhenEmptySecondsSpinner.getValue()));
+                }
+                if (textFilteringVersionSpinner.isEnabled()) {
+                    config.setProperty("text-filtering-version", String.valueOf(textFilteringVersionSpinner.getValue()));
                 }
 
                 try {
@@ -1123,6 +1159,46 @@ public class ServerPage extends JFrame {
                     maxChainedNeighborUpdatesSpinner.setValue(Integer.parseInt(config.getProperty("max-chained-neighbor-updates")));
                 } else {
                     maxChainedNeighborUpdatesSpinner.setEnabled(false);
+                }
+                if (config.containsKey("initial-disabled-packs")) {
+                    initialDisabledPacksTextField.setText(config.getProperty("initial-disabled-packs"));
+                } else {
+                    initialDisabledPacksTextField.setEnabled(false);
+                }
+                if (config.containsKey("initial-enabled-packs")) {
+                    initialEnabledPacksTextField.setText(config.getProperty("initial-enabled-packs"));
+                } else {
+                    initialEnabledPacksTextField.setEnabled(false);
+                }
+                if (config.containsKey("log-ips")) {
+                    logIPsCheckBox.setSelected(LogSM.parseBoolean(config.getProperty("log-ips")));
+                } else {
+                    logIPsCheckBox.setEnabled(false);
+                }
+                if (config.containsKey("resource-pack-id")) {
+                    resourcePackIDTextField.setText(config.getProperty("resource-pack-id"));
+                } else {
+                    resourcePackIDTextField.setEnabled(false);
+                }
+                if (config.containsKey("region-file-compression")) {
+                    regionFileCompressionComboBox.setSelectedItem(config.getProperty("region-file-compression"));
+                } else {
+                    regionFileCompressionComboBox.setEnabled(false);
+                }
+                if (config.containsKey("bug-report-link")) {
+                    bugReportLinkTextField.setText(config.getProperty("log-ips"));
+                } else {
+                    bugReportLinkTextField.setEnabled(false);
+                }
+                if (config.containsKey("pause-when-empty-seconds")) {
+                    pauseWhenEmptySecondsSpinner.setValue(Integer.parseInt(config.getProperty("region-file-compression")));
+                } else {
+                    pauseWhenEmptySecondsSpinner.setEnabled(false);
+                }
+                if (config.containsKey("text-filtering-version")) {
+                    textFilteringVersionSpinner.setValue(config.getProperty("text-filtering-version"));
+                } else {
+                    textFilteringVersionSpinner.setEnabled(false);
                 }
 
                 fis.close();
